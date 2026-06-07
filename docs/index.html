@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lofoty 2026 – Plan Szczegółowy</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fjord: #1a4a6e;
+    --ice: #e8f4fd;
+    --rock: #4a4e56;
+    --arctic: #0d7a5f;
+    --sand: #f2ede6;
+    --gold: #c8973a;
+    --coral: #b85a3f;
+    --muted: #6b7280;
+    --border: #d1d9e0;
+    --bg: #f8f9fb;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--rock);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .cover {
+    background: linear-gradient(135deg, #0d2a42 0%, #1a4a6e 50%, #0d7a5f 100%);
+    color: white;
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 300px; height: 200px;
+    background: radial-gradient(ellipse, rgba(200,151,58,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cover-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 12px;
+  }
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .cover-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 28px;
+  }
+  .cover-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .pill {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px 40px;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+  }
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-hike { background: var(--arctic); }
+  .dot-food { background: var(--gold); }
+  .dot-view { background: var(--fjord); }
+  .dot-activity { background: var(--coral); }
+  .dot-drive { background: #9ca3af; }
+  .dot-fly { background: #7c3aed; }
+
+  .content {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+  }
+
+  .day-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 28px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .day-header {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--border);
+  }
+  .day-num {
+    background: var(--fjord);
+    color: white;
+    padding: 16px 20px;
+    min-width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .day-num .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .day-num .label {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-top: 4px;
+  }
+  .day-meta {
+    padding: 14px 20px;
+    flex: 1;
+  }
+  .day-date {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--fjord);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .day-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: #1a1f2e;
+    margin: 2px 0 4px;
+  }
+  .day-base {
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .day-base::before {
+    content: '🏠';
+    font-size: 11px;
+  }
+  .day-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 8px 20px 12px;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  .tag {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 500;
+  }
+  .tag-hike { background: #d1fae5; color: #065f46; }
+  .tag-food { background: #fef3c7; color: #92400e; }
+  .tag-view { background: #dbeafe; color: #1e40af; }
+  .tag-activity { background: #fee2e2; color: #991b1b; }
+  .tag-drive { background: #f3f4f6; color: #374151; }
+  .tag-top { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
+
+  .schedule {
+    padding: 0;
+  }
+  .event {
+    display: grid;
+    grid-template-columns: 72px 24px 1fr;
+    gap: 0;
+    padding: 0;
+    position: relative;
+  }
+  .event:not(:last-child) .event-line {
+    border-left: 1px dashed var(--border);
+  }
+  .event-time {
+    padding: 12px 12px 12px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--fjord);
+    text-align: right;
+    white-space: nowrap;
+    align-self: start;
+    padding-top: 14px;
+  }
+  .event-dot-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 16px;
+  }
+  .event-dot-outer {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 0 1.5px var(--border);
+    background: #e5e7eb;
+    z-index: 1;
+    flex-shrink: 0;
+  }
+  .event-dot-outer.hike { background: var(--arctic); box-shadow: 0 0 0 1.5px var(--arctic); }
+  .event-dot-outer.food { background: var(--gold); box-shadow: 0 0 0 1.5px var(--gold); }
+  .event-dot-outer.view { background: var(--fjord); box-shadow: 0 0 0 1.5px var(--fjord); }
+  .event-dot-outer.activity { background: var(--coral); box-shadow: 0 0 0 1.5px var(--coral); }
+  .event-dot-outer.drive { background: #9ca3af; box-shadow: 0 0 0 1.5px #9ca3af; }
+  .event-dot-outer.fly { background: #7c3aed; box-shadow: 0 0 0 1.5px #7c3aed; }
+  .event-line {
+    flex: 1;
+    width: 1px;
+    margin-top: 3px;
+  }
+  .event-body {
+    padding: 10px 20px 10px 10px;
+    border-bottom: 1px solid #f9fafb;
+  }
+  .event:last-child .event-body {
+    border-bottom: none;
+  }
+  .event-name {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #1a1f2e;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .top-badge {
+    font-size: 9px;
+    background: #ff6b35;
+    color: white;
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .event-desc {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin-top: 3px;
+    line-height: 1.55;
+  }
+  .event-detail {
+    font-size: 11.5px;
+    color: #9ca3af;
+    margin-top: 4px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .event-detail span {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .note-box {
+    margin: 0 20px 16px;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-left: 3px solid var(--gold);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #78350f;
+    line-height: 1.5;
+  }
+  .note-box strong { color: #92400e; }
+
+  .info-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    padding: 10px 20px;
+    background: #f8fafc;
+    border-top: 1px solid var(--border);
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+  .info-badge {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 8px;
+    color: var(--rock);
+    font-weight: 500;
+  }
+
+  .section-spacer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 32px 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-spacer::before, .section-spacer::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  @media (max-width: 600px) {
+    .cover { padding: 32px 20px 28px; }
+    .cover-title { font-size: 26px; }
+    .content { padding: 20px 12px 48px; }
+    .legend { padding: 12px 16px; }
+    .event-time { padding-left: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-eyebrow">Szczegółowy plan podróży</div>
+  <div class="cover-title">Lofoty 2026</div>
+  <div class="cover-sub">29 czerwca – 9 lipca · 10 nocy · Evenes (EVE) · VW ID.3</div>
+  <div class="cover-pills">
+    <span class="pill">5 hoteli</span>
+    <span class="pill">4 trekkingi TOP</span>
+    <span class="pill">Rejs Trollfjord</span>
+    <span class="pill">Kajaki Henningsvær</span>
+    <span class="pill">Lofoten Seafood Center</span>
+    <span class="pill">Restauracje TOP</span>
+    <span class="pill">Midnight sun</span>
+  </div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="dot dot-hike"></div> Trekking / Hike</div>
+  <div class="legend-item"><div class="dot dot-food"></div> Restauracja / Jedzenie</div>
+  <div class="legend-item"><div class="dot dot-view"></div> Widoki / Zwiedzanie</div>
+  <div class="legend-item"><div class="dot dot-activity"></div> Aktywność / Atrakcja</div>
+  <div class="legend-item"><div class="dot dot-drive"></div> Przejazd</div>
+  <div class="legend-item"><div class="dot dot-fly"></div> Lot</div>
+</div>
+
+<div class="content">
+
+  <!-- ===== DZIEŃ 1 ===== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num"><div class="num">1</div><div class="label">Dzień</div></div>
+      <div class="day-meta">
+        <div class="day-date">Poniedziałek, 29 czerwca</div>
+        <div class="day-title">Przylot · Svolvær · Kabelvåg</div>
+        <div class="day-base">Lofoten Sommerhotell og Vandrerhjem (Kabelvåg)</div>
+      </div>
+    </div>
+    <div class="day-tags">
+      <span class="tag tag-drive">Przejazd z EVE</span>
+      <span class="tag tag-view">Svolvær</span>
+      <span class="tag tag-food">Kolacja</span>
+    </div>
+    <div class="schedule">
+      <div class="event">
+        <div class="event-time">09:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer fly"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">✈ Wylot Warszawa WAW</div>
+          <div class="event-desc">Lot z 1 przesiadką, czas lotu łącznie 5h 30min.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">15:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer fly"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">✈ Lądowanie Evenes (EVE)</div>
+          <div class="event-desc">Odbiór VW ID.3 na lotnisku. Ładowanie auta jeśli stacja dostępna na parkingu.</div>
+          <div class="event-detail"><span>⏱ ok. 30–45 min na odbiór auta i załadunek</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">15:45</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Przejazd EVE → Svolvær</div>
+          <div class="event-desc">Trasa E10 przez Narvik lub E6/E10. Spektakularne pierwsze widoki na fiordy i mosty Lofotów.</div>
+          <div class="event-detail"><span>🚗 ok. 2h – 2h 30min (170 km)</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">18:15</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Spacer po Svolvær</div>
+          <div class="event-desc">Krótkie przywitanie z Lofotami: nabrzeże, posąg Fiskerkony, widok na Svolværgeita (kozie rogi). Pierwsze zdjęcia i zakupy w Coop jeśli potrzeba.</div>
+          <div class="event-detail"><span>⏱ 45–60 min</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">19:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Przejazd do Kabelvåg · zameldowanie</div>
+          <div class="event-desc">Lofoten Sommerhotell og Vandrerhjem. Kabelvåg to urokliwa miejscowość 5 km od Svolvær.</div>
+          <div class="event-detail"><span>🚗 10 min</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">19:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer food"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Kolacja – Børsen Spiseri (Svolvær)</div>
+          <div class="event-desc">Jedna z najwyżej ocenianych restauracji w Svolvær, serwuje lokalne ryby i owoce morza. Rezerwacja zalecana. Powrót do hotelu wieczorem.</div>
+          <div class="event-detail"><span>⏱ 1,5h</span><span>🚗 10 min powrotu</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="note-box">
+      <strong>💡 Uwaga:</strong> Dzień przyjazdowy – bez ambitnych planów. Zmęczenie po podróży + różnica czasu. Przejazd z lotniska może potrwać dłużej w szczycie sezonu. Zatankować auto elektrycznie w hotelu lub Svolvær.
+    </div>
+  </div>
+
+  <!-- ===== DZIEŃ 2 ===== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num"><div class="num">2</div><div class="label">Dzień</div></div>
+      <div class="day-meta">
+        <div class="day-date">Wtorek, 30 czerwca</div>
+        <div class="day-title">Rejs Trollfjord + Henningsvær</div>
+        <div class="day-base">Lofoten Sommerhotell og Vandrerhjem (Kabelvåg)</div>
+      </div>
+    </div>
+    <div class="day-tags">
+      <span class="tag tag-top">TOP Aktywność</span>
+      <span class="tag tag-activity">Rejs Trollfjord 3h</span>
+      <span class="tag tag-view">🌟 Henningsvær</span>
+      <span class="tag tag-food">Restauracja</span>
+    </div>
+    <div class="schedule">
+      <div class="event">
+        <div class="event-time">08:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Wyjazd do Svolvær na rejs</div>
+          <div class="event-desc">Spotkanie przy nabrzeżu (Torget 22, obok Paleo Arctic Restaurant) 15 min przed odlotem.</div>
+          <div class="event-detail"><span>🚗 10 min</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">09:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer activity"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Rejs Trollfjord – Brim Explorer <span class="top-badge">TOP</span></div>
+          <div class="event-desc">Elektryczna łódź hybrydowa, 3 godziny, przewodnik anglojęzyczny. Spektakularny kanion Trollfjordu dostępny tylko od wody. Biały orzeł ogoniasty, podwodny dron, wodospad. Kup bilety z wyprzedzeniem (1490 NOK/os.).</div>
+          <div class="event-detail"><span>⏱ 3h (9:00–12:00)</span><span>📍 Svolvær Torget</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">12:15</div>
+        <div class="event-dot-col"><div class="event-dot-outer food"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Lunch w Svolvær – By The Way Lofoten</div>
+          <div class="event-desc">Kanapki z focaccii, lekki i szybki lunch po rejsie. Popularne miejsce blisko nabrzeża.</div>
+          <div class="event-detail"><span>⏱ 45 min</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">13:15</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Przejazd do Henningsvær</div>
+          <div class="event-desc">Ok. 22 km, malownicza droga przez tunele i mosty.</div>
+          <div class="event-detail"><span>🚗 25–30 min</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">13:45</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">🌟 Henningsvær – "Wenecja Północy"</div>
+          <div class="event-desc">Spacer po wiosce rybackiej rozciągniętej na wyspach połączonych mostami. Galerie, sklepy, słynne boisko piłkarskie na skale. Kaviarfactory (galeria). Widok na treske (dorsza suszonego).</div>
+          <div class="event-detail"><span>⏱ 2h</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">17:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer activity"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Kajaki – Kayak Lofoten (Henningsvær) <span class="top-badge">POLECANE DLA LAIKÓW</span></div>
+          <div class="event-desc">Najlepsze miejsce na kajaki dla początkujących na Lofotach. Peter i jego zespół doskonale radzą sobie z nowicjuszami. Spokojna woda wokół wysp Henningsvær, stabilne kajaki. Trasa 8 km dookoła wysp. Zarezerwuj z wyprzedzeniem na kayaklofoten.com. Opcjonalnie sesja wieczorna z midnight sun o 21:00–23:00.</div>
+          <div class="event-detail"><span>⏱ 3h</span><span>📍 Henningsvær harbour</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">20:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Powrót do hotelu</div>
+          <div class="event-desc">Kolacja w hotelu lub lekkie zakupy – długi dzień.</div>
+          <div class="event-detail"><span>🚗 25 min</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="note-box">
+      <strong>💡 Kayak Lofoten:</strong> Jeśli rejs Trollfjord i kajaki to za dużo na jeden dzień – przełóż kajaki na inny dzień. Najlepszy harmonogram: rejs rano + kajaki popołudniu to pełny, ale wykonalny dzień. Kajaki można też przenieść na dzień 3 rano. Rezerwacja z wyprzedzeniem obowiązkowa.
+    </div>
+  </div>
+
+  <!-- ===== DZIEŃ 3 ===== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num"><div class="num">3</div><div class="label">Dzień</div></div>
+      <div class="day-meta">
+        <div class="day-date">Środa, 1 lipca</div>
+        <div class="day-title">Festvågtind (wieczorny) + Przeprowadzka do Gammelbanken</div>
+        <div class="day-base">Gammelbanken Seaview Suites (rejon Flakstad)</div>
+      </div>
+    </div>
+    <div class="day-tags">
+      <span class="tag tag-top">TOP Hike wieczorny</span>
+      <span class="tag tag-hike">Festvågtind 2–3h</span>
+      <span class="tag tag-view">🌟 Hamnøy</span>
+      <span class="tag tag-food">Restauracja</span>
+    </div>
+    <div class="schedule">
+      <div class="event">
+        <div class="event-time">09:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Wymeldowanie + śniadanie</div>
+          <div class="event-desc">Pakowanie bagaży. Lofoten Sommerhotell.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">10:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer activity"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Lofotr Viking Museum (Borg) <span class="top-badge">OPCJA</span></div>
+          <div class="event-desc">Po drodze na południe – 14 km na północ od Leknes. Największy rekonstruowany dom wodza wikingów na świecie (83 m). Autentyczne przewodniczki w strojach, pokaz rzemiosła, łódź wikińska. Audioguide w 6 językach.</div>
+          <div class="event-detail"><span>⏱ 2–2,5h</span><span>🚗 ok. 50 min od Kabelvåg</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">12:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Przejazd → Gammelbanken + zameldowanie</div>
+          <div class="event-desc">Odłożyć bagaże, zaplanować wieczorny hike.</div>
+          <div class="event-detail"><span>🚗 ok. 45 min (50 km)</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">13:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer food"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Lunch – Makalaus lub Tapperiet Bistro (Leknes)</div>
+          <div class="event-desc">Lekki lunch w okolicach Leknes. Makalaus: casualowe, świeże ryby. Tapperiet: bistro-styl, lokalne produkty.</div>
+          <div class="event-detail"><span>⏱ 1h</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">15:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">🌟 Hamnøy + 🌟 Sakrisøy – żółte domki</div>
+          <div class="event-desc">Najbardziej fotografowane miejsca Lofotów. Drewniane czerwone rorbuery w Hamnøy, kultowe żółte domki w Sakrisøy. Spacer, zdjęcia, eksploracja.</div>
+          <div class="event-detail"><span>⏱ 1,5h</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">18:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Przejazd na parking Festvågtind</div>
+          <div class="event-desc">Parking przy Henningsvær/Festvåg (68.171056, 14.213975). Bezpłatny, ale zapełnia się szybko.</div>
+          <div class="event-detail"><span>🚗 ok. 20 min</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">18:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer activity"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">🏔 Festvågtind (541 m) – hike wieczorny <span class="top-badge">TOP</span></div>
+          <div class="event-desc">Stromy ale krótki hike (3 km round trip, +500 m wys.). Widok na Henningsvær i archipelag Lofotów. Na mapie oznaczony jako "wieczorny" – idealne wieczorne oświetlenie podczas midnight sun. Szlak skalisty i stromy, ale bez ekspozycji. Zabierz buty trekkingowe i wodoodporną kurtkę.</div>
+          <div class="event-detail"><span>⏱ 2,5–3h round trip</span><span>⬆ 500 m</span><span>💪 Umiarkowanie trudny</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">21:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Powrót do Gammelbanken</div>
+          <div class="event-desc">Słońce zachodzi po północy – możesz zostać dłużej na szczycie. Kolacja lekka z zapasów lub jutro restauracja.</div>
+          <div class="event-detail"><span>🚗 20 min</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="note-box">
+      <strong>💡 Festvågtind wieczorny:</strong> Kluczowy powód do wejścia wieczorem – midnight sun maluje widok na Henningsvær w złote kolory ok. 21:00–23:00. To magiczne doświadczenie. Jeśli pogoda niesprzyjająca rano – poczekaj na okno wieczorne.
+    </div>
+  </div>
+
+  <!-- ===== DZIEŃ 4 ===== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num"><div class="num">4</div><div class="label">Dzień</div></div>
+      <div class="day-meta">
+        <div class="day-date">Czwartek, 2 lipca</div>
+        <div class="day-title">Ryten + Kvalvika Beach – hike od 17:00 <span class="top-badge">TOP</span></div>
+        <div class="day-base">Gammelbanken Seaview Suites</div>
+      </div>
+    </div>
+    <div class="day-tags">
+      <span class="tag tag-top">TOP Hike</span>
+      <span class="tag tag-hike">Ryten 3–4h (start 17:00)</span>
+      <span class="tag tag-view">🌟 Reine</span>
+      <span class="tag tag-food">Lunch</span>
+    </div>
+    <div class="schedule">
+      <div class="event">
+        <div class="event-time">09:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">🌟 Reine – spacer i widoki</div>
+          <div class="event-desc">Najpiękniejsza wioska Lofotów. Reine Viewpoint, Reine Photo Point, Reine Lighthouse, mostek Hamnoy bridge. Widok na fiordy i charakterystyczne szczyty Reinebringen.</div>
+          <div class="event-detail"><span>⏱ 1,5h</span><span>🚗 ok. 15 min od Gammelbanken</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">10:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">🌟 Nusfjord – historyczna wioska rybacka</div>
+          <div class="event-desc">Jedna z najlepiej zachowanych tradycyjnych wiosek rybackich Norwegii. Rorbuery, drewniane magazyny, spokój i klimat. Spacer z aparatem.</div>
+          <div class="event-detail"><span>⏱ 1,5h</span><span>🚗 20 min od Reine</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">12:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer food"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Lunch – Anita's Sjømat TOP <span class="top-badge">TOP</span></div>
+          <div class="event-desc">Ikoniczne miejsce w Sakrisøy u stóp Olstind. Fish burger "Winnie the Pooh" (z łososiem i krewetkami), zupa rybna, tataki z wieloryba. Miejsce bez rezerwacji, działa jak bistro. Przyjdź przed 13:00 żeby uniknąć kolejki. Google 4.5/5, Michelin Guide.</div>
+          <div class="event-detail"><span>⏱ 1h</span><span>📍 Sakrisøy</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">14:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Odpoczynek + przygotowanie do hike'u</div>
+          <div class="event-desc">Powrót do apartamentu. Odpoczynek, naładowanie telefonu, przygotowanie plecaka (woda min. 1,5 l, przekąski, kurtka, buty trekkingowe). Sprawdzenie pogody na yr.no.</div>
+          <div class="event-detail"><span>⏱ 2,5h</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">16:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Przejazd na parking Ryten (Innersand/Indresand)</div>
+          <div class="event-desc">Płatny parking (100 NOK). GPS: okolice Fredvang, parkuj przy Innersand.</div>
+          <div class="event-detail"><span>🚗 ok. 20 min</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">17:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer activity"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">🏔 Ryten / Kvalvika – hike od 17:00 <span class="top-badge">TOP</span></div>
+          <div class="event-desc">Na mapie oznaczony "o 17–24 Beach Trail". Wejście wieczorem to złota godzina – zachodnie słońce o 21:00–23:00 maluje Kvalvika Beach w niesamowite kolory. Ryten (543 m): mini-Trolltunga, widok z lotu ptaka na plażę. Zejście na plażę opcjonalne (+1–2h). Szlak umiarkowany, gruntowo-skalny.</div>
+          <div class="event-detail"><span>⏱ 3–4h round trip do Ryten</span><span>⬆ 520 m</span><span>📏 7 km (round trip)</span><span>💪 Umiarkowany</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">21:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Szczyt Ryten – złota godzina (midnight sun)</div>
+          <div class="event-desc">Najpiękniejszy widok na Lofotach w wieczornym świetle. Zostań do 22:00–23:00 na zdjęcia.</div>
+          <div class="event-detail"><span>⏱ 30–60 min na szczycie</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">22:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Zejście i powrót do Gammelbanken</div>
+          <div class="event-detail"><span>🚗 20 min</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== DZIEŃ 5 ===== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num"><div class="num">5</div><div class="label">Dzień</div></div>
+      <div class="day-meta">
+        <div class="day-date">Piątek, 3 lipca</div>
+        <div class="day-title">Mannen + Haukland Beach + Offersøykammen</div>
+        <div class="day-base">Gammelbanken Seaview Suites</div>
+      </div>
+    </div>
+    <div class="day-tags">
+      <span class="tag tag-top">TOP Hike x2</span>
+      <span class="tag tag-hike">Mannen 2–3h</span>
+      <span class="tag tag-hike">Offersøykammen 3h</span>
+      <span class="tag tag-view">Haukland Beach TOP</span>
+      <span class="tag tag-food">Lunch</span>
+    </div>
+    <div class="schedule">
+      <div class="event">
+        <div class="event-time">08:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Wyjazd na Offersøykammen</div>
+          <div class="event-desc">Wyjazd wczesny – Offersøykammen wypełnia parking szybko w sezonie. Parking przy Skreda.</div>
+          <div class="event-detail"><span>🚗 ok. 25 min od Gammelbanken</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">08:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer activity"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">🏔 Offersøykammen (436 m) – panorama 360° <span class="top-badge">TOP</span></div>
+          <div class="event-desc">Na mapie oznaczony "w dzień 360st". Widok 360° – plaże Haukland i Uttakleiv, szczyty Lofotów, fiordy. Szlak 4 km round trip, skalny, stromy końcowy odcinek. Jedno z najlepszych doświadczeń widokowych całych wysp.</div>
+          <div class="event-detail"><span>⏱ 2,5–3h round trip</span><span>⬆ 430 m</span><span>📏 4 km</span><span>💪 Umiarkowany</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">11:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Haukland Beach TOP <span class="top-badge">TOP</span></div>
+          <div class="event-desc">Tuż pod Offersøykammen – biały piasek, turkusowa woda, dramatyczne tło gór. Jedna z najpiękniejszych plaż Norwegii. Kąpiel jeśli warunki sprzyjają (woda zimna ~12°C). Odpoczynek i lunch z zapasów.</div>
+          <div class="event-detail"><span>⏱ 1h</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">13:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer food"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Lunch – Lofoten Seafood Center TOP!!! <span class="top-badge">TOP!</span></div>
+          <div class="event-desc">Centrum w Mortsund (30 min od Haukland). NAJPIERW wycieczka (Salmon Farm Tour łodzią na fermę łososi ~2h), POTEM lunch degustacyjny w restauracji. Rezerwacja obowiązkowa z wyprzedzeniem (lofotenseafood.com). Lunch restaurant Mon–Fri 11:00–14:30. Zarezerwuj ZWIEDZANIE na 11:00 lub 13:00 i lunch zaraz po. Całość zajmuje ok. 3–3,5h.</div>
+          <div class="event-detail"><span>⏱ ZWIEDZANIE: 2h + LUNCH: 1,5h = 3,5h razem</span><span>📍 Mortsund</span><span>🚗 30 min od Haukland</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">13:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Przejazd do Mortsund – Lofoten Seafood Center</div>
+          <div class="event-detail"><span>🚗 30 min</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">13:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer activity"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Wycieczka: Salmon Farm Tour (łódź RIB) <span class="top-badge">TOP!!!</span></div>
+          <div class="event-desc">Rejs łodzią na fermę łososia w Buksnesfjord. Karmienie łososi, automatyczne stanowisko karmienia, prezentacja akwakultury. Następnie House of Stockfish – historia i produkcja sztokfisza (ikony norweskiej kuchni).</div>
+          <div class="event-detail"><span>⏱ ok. 2h</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">15:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer food"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Lunch degustacyjny – Lofoten Seafood Restaurant</div>
+          <div class="event-desc">Dania z łososia i sztokfisza bezpośrednio po zwiedzaniu. Degustacyjne menu inspirowane lokalnymi produktami. Widok na fiord.</div>
+          <div class="event-detail"><span>⏱ 1,5h</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">17:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Przejazd na Mannen (Haukland Beach parking)</div>
+          <div class="event-detail"><span>🚗 30 min</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">18:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer activity"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">🏔 Mannen (400 m) – wieczorny hike <span class="top-badge">TOP</span></div>
+          <div class="event-desc">Na mapie "obowiązkowe 360 w dzień". Krótki, stromy hike z parkingu Haukland. Widok 360°: plaże Haukland i Uttakleiv, biały piasek i turkusowa woda z góry. Jeden z najlepszych stosunków wysiłek/widok na Lofotach. Trasa nieoznakowana ale czytelna.</div>
+          <div class="event-detail"><span>⏱ 2–2,5h round trip</span><span>⬆ 400 m</span><span>📏 3,5 km</span><span>💪 Umiarkowany</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">20:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Powrót do Gammelbanken</div>
+          <div class="event-detail"><span>🚗 25 min</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="note-box">
+      <strong>💡 Lofoten Seafood Center:</strong> Lunch restaurant czynny tylko pon–pt 11:00–14:30. Zarezerwuj zwiedzanie z wyprzedzeniem mailowo/telefonicznie. Jeśli harmonogram tego dnia nie pasuje – przestaw Seafood Center na dzień 6 (sob 4 lip przed przeprowadzką). Uwaga: w weekend restauracja zamknięta – sprawdź opcje.
+    </div>
+  </div>
+
+  <div class="section-spacer">Przeprowadzka do Sørvágen</div>
+
+  <!-- ===== DZIEŃ 6 ===== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num"><div class="num">6</div><div class="label">Dzień</div></div>
+      <div class="day-meta">
+        <div class="day-date">Sobota, 4 lipca</div>
+        <div class="day-title">Przeprowadzka + 🌟 Å i Lofoten + The Bakery</div>
+        <div class="day-base">Buodden Rorbuer – Fisherman Cabins Sørvágen</div>
+      </div>
+    </div>
+    <div class="day-tags">
+      <span class="tag tag-view">🌟 Å i Lofoten</span>
+      <span class="tag tag-top">The Bakery at Å TOP</span>
+      <span class="tag tag-view">Reine Viewpoint</span>
+      <span class="tag tag-food">Gammelbua TOP</span>
+    </div>
+    <div class="schedule">
+      <div class="event">
+        <div class="event-time">09:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Wymeldowanie z Gammelbanken</div>
+          <div class="event-desc">Bagaże do auta, wymeldowanie.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">09:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Przejazd do Å i Lofoten (koniec drogi E10)</div>
+          <div class="event-detail"><span>🚗 ok. 30 min od Gammelbanken</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">10:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer food"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">The Bakery at Å <span class="top-badge">TOP</span></div>
+          <div class="event-desc">Legendarna piekarnia na końcu świata. Chleby, cynamonki (kanelboller), lokalne wypieki. Coś śniadaniowego i do plecaka na dzień.</div>
+          <div class="event-detail"><span>⏱ 30–45 min</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">10:45</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">🌟 Å i Lofoten – spacer</div>
+          <div class="event-desc">Najbardziej wysunieta na południe wioska Lofotów. Norsk Fiskeværmuseum (muzeum tradycyjnego rybołówstwa), suszone ryby, klimat końca świata. Viewpoint at Å – panorama na ocean.</div>
+          <div class="event-detail"><span>⏱ 1h</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">12:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">🌟 Reine – Reine Viewpoint + photo points</div>
+          <div class="event-desc">Djupfjord Bridge, Reine utsiktspunkt, Reine Photo Point, Hamnoy Bridge. Rozejrzyj się za punktami widokowymi z mapy.</div>
+          <div class="event-detail"><span>⏱ 1h</span><span>🚗 15 min od Å</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">13:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Zameldowanie Buodden Rorbuer (Sørvágen)</div>
+          <div class="event-desc">Drewniane domki rybackie na wodzie. Zameldowanie, odpoczynek.</div>
+          <div class="event-detail"><span>🚗 5 min od Reine</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">19:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer food"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Kolacja – Gammelbua Restaurant TOP <span class="top-badge">TOP</span></div>
+          <div class="event-desc">Jeden z najlepszych restaurantów Lofotów. Google 4.7/5, ponad 1140 recenzji. Historyczny budynek z 1780 r. (dawny sklep generalny), kominek, widoki na Reine. Specjalności: halibut, renifer, sztokfisz. Rezerwacja niezbędna (gammelbua.no).</div>
+          <div class="event-detail"><span>⏱ 2h</span><span>📍 Reine centrum</span><span>🚗 5 min od Buodden</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== DZIEŃ 7 ===== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num"><div class="num">7</div><div class="label">Dzień</div></div>
+      <div class="day-meta">
+        <div class="day-date">Niedziela, 5 lipca</div>
+        <div class="day-title">Reinebringa o 1–3 w nocy / wczesny ranek <span class="top-badge">TOP!!!</span></div>
+        <div class="day-base">Buodden Rorbuer – Fisherman Cabins Sørvágen</div>
+      </div>
+    </div>
+    <div class="day-tags">
+      <span class="tag tag-top">TOP Hike nocny / świt</span>
+      <span class="tag tag-hike">Reinebringa 2,5–3h</span>
+      <span class="tag tag-view">🌟 Sakrisøy</span>
+      <span class="tag tag-food">Anita's Sjømat TOP</span>
+    </div>
+    <div class="schedule">
+      <div class="event">
+        <div class="event-time">01:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer activity"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">🏔 Reinebringa nocna – start 01:00 <span class="top-badge">TOP!!!</span></div>
+          <div class="event-desc">Na mapie: "wejść na szczyt o 1–3 w nocy obowiązkowe". W lipcu słońce zachodzi po północy i niemal natychmiast wschodzi – wejście nocne daje magiczne złote/różowe niebo nad Reine bez tłumów (w dzień setki ludzi!). 1978 schodów Sherpa, 400 m przewyższenia, 5 km round trip. Trailhead przy tunelu Ramsvik, start od Djupfjord Bridge (bezpłatny parking). Zabierz czołówkę, ciepłą kurtkę, wodę.</div>
+          <div class="event-detail"><span>⏱ 2,5–3h round trip</span><span>⬆ 400 m</span><span>📏 5 km</span><span>💪 Umiarkowanie trudny (schody)</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">04:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Wschód słońca ze szczytu Reinebringa</div>
+          <div class="event-desc">Widok na Reine, Sakrisøy, Hamnøy i Reinefjorden z góry. Niesamowity widok o świcie nad ciszą fiordów bez tłumów. Zostań do 5:00 na zdjęcia.</div>
+          <div class="event-detail"><span>⏱ 30–60 min na szczycie</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">05:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Zejście i powrót do Buodden</div>
+          <div class="event-desc">Spać! Zaplanuj sen do ~11:00–12:00.</div>
+          <div class="event-detail"><span>🚗 10 min</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">12:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer food"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Lunch – Anita's Sjømat TOP <span class="top-badge">TOP</span></div>
+          <div class="event-desc">Drugi wizyt w Anita's jeśli nie był w planie D4 – lub zamiast. Kuchnia otwarta 11:00–19:00 (nd od 12:00). Słynny fish burger, zupa rybna, ikra z dorsza arktycznego, świeże owoce morza prosto z morza.</div>
+          <div class="event-detail"><span>⏱ 1h</span><span>📍 Sakrisøy</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">13:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Skagsanden Beach + Rambergstranda</div>
+          <div class="event-desc">Piękne plaże w okolicach Flakstad. Skagsanden to spektakularna plaża z dramatycznymi skałami. Ramberg – biały piasek, widok na szczyty. Odpoczynek po nocnym hike'u.</div>
+          <div class="event-detail"><span>⏱ 1,5h</span><span>🚗 30 min od Reine</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">15:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Uttakleiv Beach + Vik Beach</div>
+          <div class="event-desc">Plaże w rejonie Vestvågøy. Uttakleiv – jedna z najpiękniejszych plaż Lofotów. Spacer, zdjęcia, relaks przy morzu.</div>
+          <div class="event-detail"><span>⏱ 1h</span><span>🚗 20 min</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">18:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Wieczór w Buodden Rorbuer</div>
+          <div class="event-desc">Relaks w domkach rybackich na wodzie. Kolacja z własnych zapasów. Możliwość wynajęcia kajaka lub wędki przy domkach.</div>
+        </div>
+      </div>
+    </div>
+    <div class="note-box">
+      <strong>💡 Nocny hike na Reinebringa:</strong> To jeden z najbardziej niezapomnianych momentów całej podróży – widok na złote fiordy o 3 w nocy, absolutna cisza, praktycznie zero ludzi. Upewnij się, że pogoda jest dobra (yr.no). Jeśli zachmurzenie / deszcz – przestaw na inną noc.
+    </div>
+  </div>
+
+  <div class="section-spacer">Przeprowadzka do Eliassen Rorbuer</div>
+
+  <!-- ===== DZIEŃ 8 ===== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num"><div class="num">8</div><div class="label">Dzień</div></div>
+      <div class="day-meta">
+        <div class="day-date">Poniedziałek, 6 lipca</div>
+        <div class="day-title">Przeprowadzka + Eggum + Unstad</div>
+        <div class="day-base">Eliassen Rorbuer (Hamnøy / rejon Flakstad)</div>
+      </div>
+    </div>
+    <div class="day-tags">
+      <span class="tag tag-view">Eggum Lighthouse</span>
+      <span class="tag tag-view">Unstad Beach (surf)</span>
+      <span class="tag tag-food">Unstad Arctic Surf + Kolacja</span>
+    </div>
+    <div class="schedule">
+      <div class="event">
+        <div class="event-time">09:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Wymeldowanie z Buodden Rorbuer</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">09:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Przejazd przez Eggum</div>
+          <div class="event-desc">Eggum – malownicza droga po stronie północnej wyspy, latarnia morska i rzeźba głowy na klifie. Niesamowita sceneria. Zatrzymaj się na zdjęcia i spacer przy latarni.</div>
+          <div class="event-detail"><span>⏱ 45 min stop</span><span>🚗 ok. 50 min od Sørvágen</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">11:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Unstad Beach – kultowe miejsce surferów</div>
+          <div class="event-desc">Jedna z niewielu plaż arktycznych z falami do surfowania. Dramatyczne klifowe otoczenie, plażowicze i surferzy. Spacer, zdjęcia.</div>
+          <div class="event-detail"><span>⏱ 45 min</span><span>🚗 15 min od Eggum</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">12:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer food"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Lunch – Unstad Arctic Surf Café</div>
+          <div class="event-desc">Na mapie jako "Les meilleurs roulés à la cannelle!" – najlepsze cynamonki! Kawiarnia przy plaży surfowej, domowa atmosfera, ciepłe napoje i lokalne wypieki.</div>
+          <div class="event-detail"><span>⏱ 45 min</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">13:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Przejazd do Eliassen Rorbuer · zameldowanie</div>
+          <div class="event-desc">Jeden z najbardziej ikonicznych rorbuerów na Lofotach – nad wodą, widok na Reinefjord i Hamnøy. Zameldowanie i eksploracja.</div>
+          <div class="event-detail"><span>🚗 ok. 40 min</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">15:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Grunnforfjord and the lakes + Morfjord</div>
+          <div class="event-desc">Malownicze jeziora i fiordy w rejonie Vestvågøy – punkty z mapy. Krótki objazd samochodem z postojami widokowymi.</div>
+          <div class="event-detail"><span>⏱ 1,5h</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">19:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer food"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Kolacja – Havet Restaurant Sørvågen</div>
+          <div class="event-desc">Restauracja lokalna w pobliżu – kuchnia norweska/owoce morza. Lub Maren Anna (wymagana rezerwacja, wysoko oceniany chef's restaurant w Reine).</div>
+          <div class="event-detail"><span>⏱ 1,5h</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== DZIEŃ 9 ===== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num"><div class="num">9</div><div class="label">Dzień</div></div>
+      <div class="day-meta">
+        <div class="day-date">Wtorek, 7 lipca</div>
+        <div class="day-title">Ballstad + Kabelvåg + Day trip</div>
+        <div class="day-base">Eliassen Rorbuer</div>
+      </div>
+    </div>
+    <div class="day-tags">
+      <span class="tag tag-view">Ballstad</span>
+      <span class="tag tag-view">Kabelvåg</span>
+      <span class="tag tag-food">Trevarefabrikken</span>
+      <span class="tag tag-view">Storsandnes Beach</span>
+    </div>
+    <div class="schedule">
+      <div class="event">
+        <div class="event-time">09:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Ballstad – wioska rybacka</div>
+          <div class="event-desc">Spokojniejsza, mniej turystyczna wioska. Piękne rorbuery nad wodą, tradycyjny klimat. Storsandnes Beach w pobliżu – biały piasek, dzika plaża.</div>
+          <div class="event-detail"><span>⏱ 1,5h</span><span>🚗 ok. 20 min od Eliassen</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">11:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Kabelvåg – Lofotaquarium + kościół</div>
+          <div class="event-desc">Opcjonalnie: Lofotaquarium (ryby nordyckie, akwaria). Malownicze centrum Kabelvåg, kościół Vagankyrkja. Spokojny spacer.</div>
+          <div class="event-detail"><span>⏱ 1,5h</span><span>🚗 ok. 50 min</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">13:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer food"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Lunch – Trevarefabrikken (Svolvær / Henningsvær)</div>
+          <div class="event-desc">Kulturalna restauracja-browar w przemysłowym budynku. Nowoczesna norweska kuchnia, dobre piwo. Bardzo wysoko oceniany. Rezerwacja zalecana.</div>
+          <div class="event-detail"><span>⏱ 1,5h</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">15:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Laukvika + Punto Panoramico</div>
+          <div class="event-desc">Punkty widokowe z mapy. Laukvika – urokliwa zatoka. Punto Panoramico – panoramiczny punkt widokowy z drogi.</div>
+          <div class="event-detail"><span>⏱ 1h</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">17:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Powrót do Eliassen Rorbuer – wieczór na wodzie</div>
+          <div class="event-desc">Ostatni wieczór w kultowym rorbuerze. Midnight sun nad Reinefjordem z tarasu. Kolacja z zapasów lub Havet Restaurant.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-spacer">Ostatni odcinek – w kierunku lotniska</div>
+
+  <!-- ===== DZIEŃ 10 ===== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num"><div class="num">10</div><div class="label">Dzień</div></div>
+      <div class="day-meta">
+        <div class="day-date">Środa, 8 lipca</div>
+        <div class="day-title">Przeprowadzka do Sandtorgholmen (EVE)</div>
+        <div class="day-base">Sandtorgholmen Hotel – Best Western Signature</div>
+      </div>
+    </div>
+    <div class="day-tags">
+      <span class="tag tag-drive">Długi przejazd ~3h</span>
+      <span class="tag tag-view">Selfjord road</span>
+      <span class="tag tag-food">Kolacja w hotelu</span>
+    </div>
+    <div class="schedule">
+      <div class="event">
+        <div class="event-time">09:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Wymeldowanie z Eliassen Rorbuer</div>
+          <div class="event-desc">Ostatnie spojrzenie na Reinefjord. Pakowanie.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">09:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Selfjord road + Morpheus Beach</div>
+          <div class="event-desc">Malownicza droga po drodze. Morpheus Beach – ukryta plaża. Kilka postojów widokowych z mapy: "View from Mortsund", "View from the road".</div>
+          <div class="event-detail"><span>⏱ 1–1,5h z postojami</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">12:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer food"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Lunch w drodze – Gadus lub Restaurant Lofotmat</div>
+          <div class="event-desc">Lunch w jednej z miejscowości na trasie E10 przed Svolvær. Gadus (Reine/Leknes) – lokalny połów. Lub lekki lunch z wcześniej kupionych produktów.</div>
+          <div class="event-detail"><span>⏱ 1h</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">14:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Przejazd do Sandtorgholmen Hotel</div>
+          <div class="event-desc">Sandtorgholmen Hotel na wyspie Sandtorget k. Harstad. Ok. 130 km od Svolvær. Majestatyczny przejazd przez most Narvik i E6.</div>
+          <div class="event-detail"><span>🚗 ok. 2,5–3h (zależy od ruchu)</span><span>⚡ Naładuj auto przed wyjazdem!</span></div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">17:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer view"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Zameldowanie + spacer po okolicy</div>
+          <div class="event-desc">Sandtorgholmen Hotel – Best Western Signature na wyspie. Widoki na Harstad i okoliczne fiordy. Relaks po długim przejeździe.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">19:00</div>
+        <div class="event-dot-col"><div class="event-dot-outer food"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Kolacja – restauracja hotelowa</div>
+          <div class="event-desc">Ostatnia kolacja na Północy. Warto wcześniej spakować bagaże na jutrzejszy lot. Naładuj VW ID.3 przez noc!</div>
+        </div>
+      </div>
+    </div>
+    <div class="note-box">
+      <strong>⚠️ Sandtorgholmen do EVE:</strong> Sprawdź czas przejazdu z hotelu do lotniska EVE przed odlotem (11:05). Sandtorgholmen → EVE ok. 1h 20–30 min. Wyjedź o max. 08:15. Oddaj auto na lotnisku na ok. 30 min przed odprawą.
+    </div>
+  </div>
+
+  <!-- ===== DZIEŃ 11 ===== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num"><div class="num">11</div><div class="label">Dzień</div></div>
+      <div class="day-meta">
+        <div class="day-date">Czwartek, 9 lipca</div>
+        <div class="day-title">Powrót do Warszawy</div>
+        <div class="day-base">—</div>
+      </div>
+    </div>
+    <div class="day-tags">
+      <span class="tag tag-drive">Wylot EVE 11:05</span>
+      <span class="tag tag-fly">Lądowanie WAW 19:15</span>
+    </div>
+    <div class="schedule">
+      <div class="event">
+        <div class="event-time">07:30</div>
+        <div class="event-dot-col"><div class="event-dot-outer drive"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Wymeldowanie + wyjazd na lotnisko EVE</div>
+          <div class="event-desc">Bagaże gotowe od wieczoru. Śniadanie w hotelu. Wyjazd o 07:30 max.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">08:45</div>
+        <div class="event-dot-col"><div class="event-dot-outer fly"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">Oddanie VW ID.3 + odprawa EVE</div>
+          <div class="event-desc">Zwrot auta na lotnisku Harstad/Narvik. Odprawa, odprawa bagażu, bezpieczeństwo.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">11:05</div>
+        <div class="event-dot-col"><div class="event-dot-outer fly"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">✈ Wylot EVE → Warszawa (1 przesiadka)</div>
+          <div class="event-desc">8h 10min lotu z przesiadką.</div>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-time">19:15</div>
+        <div class="event-dot-col"><div class="event-dot-outer fly"></div><div class="event-line"></div></div>
+        <div class="event-body">
+          <div class="event-name">✈ Lądowanie Warszawa WAW</div>
+          <div class="event-desc">Witaj z powrotem. Lofoty zostają w sercu.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary box -->
+  <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-top: 8px;">
+    <div style="font-family: 'Playfair Display', serif; font-size: 18px; color: #1a1f2e; margin-bottom: 16px;">Podsumowanie rezerwacji do zrobienia</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 13px;">
+      <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px;">
+        <div style="font-weight: 600; color: #065f46; margin-bottom: 6px;">🚤 Aktywności (z wyprzedzeniem!)</div>
+        <div style="color: #374151; line-height: 1.8;">• Trollfjord Cruise – brimexplorer.com<br>• Kajaki Henningsvær – kayaklofoten.com<br>• Lofoten Seafood Center – lofotenseafood.com</div>
+      </div>
+      <div style="background: #fefce8; border: 1px solid #fde047; border-radius: 8px; padding: 12px;">
+        <div style="font-weight: 600; color: #92400e; margin-bottom: 6px;">🍴 Restauracje (rezerwacja zalecana)</div>
+        <div style="color: #374151; line-height: 1.8;">• Børsen Spiseri (D1 kolacja)<br>• Gammelbua Restaurant (D6 kolacja)<br>• Maren Anna (opcja D8) – trudna rezerwacja</div>
+      </div>
+      <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 12px;">
+        <div style="font-weight: 600; color: #1e40af; margin-bottom: 6px;">⚡ Logistyka VW ID.3</div>
+        <div style="color: #374151; line-height: 1.8;">• Ładowanie co wieczór w hotelu<br>• Stacja w Leknes i Svolvær (Mer/Zaptec)<br>• Pełna bateria przed przejazdem D10 na EVE</div>
+      </div>
+      <div style="background: #fdf4ff; border: 1px solid #e9d5ff; border-radius: 8px; padding: 12px;">
+        <div style="font-weight: 600; color: #6b21a8; margin-bottom: 6px;">🌦 Pogoda i elastyczność</div>
+        <div style="color: #374151; line-height: 1.8;">• Sprawdzaj yr.no każdego wieczoru<br>• Nocny Reinebringa – tylko przy dobrej pogodzie<br>• Ryten/Festvågtind – bez chmur na szczycie!</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
